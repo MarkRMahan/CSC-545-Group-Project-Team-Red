@@ -14,7 +14,7 @@ class Block extends Ball {
     rect(blockXpos, blockYpos, blockWidth, blockHeight);
   }
   
-  void blockBounce(Ball theBall, float ballXpos, float ballYpos, float vertSpeed) {
+  void blockBounce(Ball theBall, float ballXpos, float ballYpos) {
     // If the ball is above/below the paddle
     if ((ballXpos + (h / 2) > blockXpos - (blockWidth / 2) && (ballXpos - (h / 2) < blockXpos + (blockWidth / 2)))) {
       // If the ball is "touching" the block

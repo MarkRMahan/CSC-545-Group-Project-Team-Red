@@ -37,7 +37,7 @@ void gameScreen() {
   background(255);
   theBall.displayBall(); // Displays the ball
   testBlock.displayBlock(); // Displays the block
-  testBlock.blockBounce(theBall, theBall.ballXpos, theBall.ballYpos, theBall.vertSpeed); // Bounces the ball off of the block
+  testBlock.blockBounce(theBall, theBall.ballXpos, theBall.ballYpos); // Bounces the ball off of the block
   theBall.gravitationalPull(); // Gravity
   theBall.inBounds(); // Keeps the ball in-bounds
 }

@@ -98,8 +98,6 @@ def draw():
 
 def titleScreen():
     background(0)
-    textAlign(CENTER)
-    text("Click to start", 500, 300)
     
 def gameScreen():
     background(255)

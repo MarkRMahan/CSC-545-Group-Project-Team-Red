@@ -5,7 +5,7 @@ class Ball {
   
   Ball() {
     // Random color ball each time
-    c = color(int(random(0, 360)), 100, 100);
+    c = color(0, 100, 100);
     
     // Width and height of the ball
     w = 25;
@@ -15,7 +15,7 @@ class Ball {
     ballXpos = 500;
     ballYpos = 100;
     
-    canvasWidth = 1000;
+    canvasWidth = 1500;
     canvasHeight = 600;
     sidewaysDirection = "East"; // Ball starts out moving "East"
     

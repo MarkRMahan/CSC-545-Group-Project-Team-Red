@@ -1,17 +1,28 @@
 class Block extends Ball {
-  float blockXpos, blockYpos, blockWidth, blockHeight;
+  float blockXpos, blockYpos, blockWidth, blockHeight, canvasWidth, canvasHeight;
   
   Block() {
     blockWidth = 80;
     blockHeight = 20;
-    blockXpos = 400;
-    blockYpos = 500;
+    canvasWidth = 1500;
+    canvasHeight = 600;
+    blockXpos = random(canvasWidth, canvasWidth + canvasWidth / 2);
+    blockYpos = random(canvasHeight / 2, canvasHeight - 30);
   }
   
   void displayBlock() {
     fill(0);
     rectMode(CENTER);
     rect(blockXpos, blockYpos, blockWidth, blockHeight);
+    scrollBlock();
+  }
+  
+  void scrollBlock() {
+    blockXpos -= 5;
+    if (blockXpos < 0 - 100) {
+      blockXpos += canvasWidth + random(blockWidth, canvasWidth / 2);
+      blockYpos = random(60, canvasHeight - 60);
+    }
   }
   
   void blockBounce(Ball theBall, float ballXpos, float ballYpos) {

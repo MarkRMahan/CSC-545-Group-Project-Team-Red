@@ -15,10 +15,14 @@ This project is meant to run a platforming game
 
 int screenType = 0;
 Ball theBall = new Ball(); // The bouncing ball
-Block testBlock = new Block(); // Test block for now
+int numBlocks = 5;
+Block testBlocks[] = new Block[numBlocks]; // Test block for now
 
 void setup() {
-  size(1000, 600);
+  size(1500, 600);
+  for (int i = numBlocks - 1; i != -1; i--) {
+    testBlocks[i] = new Block();
+  }
 }
 
 void draw() {
@@ -30,14 +34,18 @@ void draw() {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 void titleScreen() {
-  background(0);
+  background(150);
 }
 
 void gameScreen() {
   background(255);
   theBall.displayBall(); // Displays the ball
-  testBlock.displayBlock(); // Displays the block
-  testBlock.blockBounce(theBall, theBall.ballXpos, theBall.ballYpos); // Bounces the ball off of the block
+  for (int i = 0; i < numBlocks; i++) {
+    testBlocks[i].displayBlock();
+    testBlocks[i].blockBounce(theBall, theBall.ballXpos, theBall.ballYpos);
+  }
+  //testBlock.displayBlock(); // Displays the block
+  //testBlock.blockBounce(theBall, theBall.ballXpos, theBall.ballYpos); // Bounces the ball off of the block
   theBall.gravitationalPull(); // Gravity
   theBall.inBounds(); // Keeps the ball in-bounds
 }
@@ -48,17 +56,13 @@ void gameOverScreen() {
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+void mousePressed() {
+  if (screenType == 0) screenType = 1; // A click will start the game
+}
+
 void keyPressed() {
   if (key == CODED) {
     if (keyCode == LEFT) theBall.moveLeft(); // Moves the ball left
     else if (keyCode == RIGHT) theBall.moveRight(); // Moves the ball right
   }
-}
-
-void mousePressed() {
-  if (screenType == 0) startGame(); // A click will start the game
-}
-
-void startGame() {
-  screenType = 1; // Changes the screen
 }

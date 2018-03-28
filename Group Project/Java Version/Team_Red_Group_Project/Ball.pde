@@ -1,5 +1,5 @@
 class Ball {
-  float airResistance, friction, w, h, ballXpos, ballYpos, canvasWidth, canvasHeight, gravityValue, vertSpeed, horizSpeed; // xpos and ypos used to track ball
+  float airResistance, friction, w, h, ballXpos, ballYpos, ballDX, ballDY, targetX, targetY, canvasWidth, canvasHeight, gravityValue, vertSpeed, horizSpeed, easing; // xpos and ypos used to track ball
   color c;
   String sidewaysDirection;
   
@@ -12,19 +12,24 @@ class Ball {
     h = w;
     
     // The ball's x and y positions
-    ballXpos = 500;
-    ballYpos = 100;
+    targetX = 500;
+    targetY = 100;
+    ballDX = targetX - ballXpos;
+    ballDY = targetY - ballYpos;
+    ballXpos = ballDX * easing;
+    ballYpos = ballDY * easing;
     
     canvasWidth = 1500;
     canvasHeight = 600;
     sidewaysDirection = "East"; // Ball starts out moving "East"
     
     // Used for the "physics" of the ball
-    gravityValue = 0.5;
+    gravityValue = 1;
     vertSpeed = 0;
-    horizSpeed = 10;
+    horizSpeed = 15;
     airResistance = 0.0001;
     friction = 0.1;
+    easing = 0.25;
   }
   
   void displayBall() { // Displays the ball
@@ -48,16 +53,29 @@ class Ball {
   
   void gravitationalPull() {
     vertSpeed += gravityValue; // Vertical speed will increase/decrease
-    ballYpos += vertSpeed; // Change where the ball is vertically
-    ballXpos += horizSpeed; // Change where the ball is horizontally
+    targetY = ballYpos + vertSpeed; // Change where the ball is vertically
+    targetX = ballXpos + horizSpeed; // Change where the ball is horizontally
+    ballDX = targetX - ballXpos;
+    ballDY = targetY - ballYpos;
+    ballXpos += ballDX * easing;
+    //ballXpos += horizSpeed;
+    ballYpos += ballDY * easing;
     vertSpeed -= (vertSpeed * airResistance);
     horizSpeed -= (horizSpeed * airResistance);
   }
   
+  void switchGravity() {
+    gravityValue *= -1;
+  }
+  
   void noReductionBounce(float surface) { // Used for the block(s)
-    ballYpos = surface - (h / 2);
+    if (gravityValue > 0) {
+      ballYpos = surface - (h / 2);
+    } else {
+      ballYpos = surface + (h + 2);
+    }
     vertSpeed *= -1;
-    vertSpeed += (vertSpeed * friction) * 2;
+    vertSpeed += (vertSpeed * friction) * 1.1;
   }
   
   void bounceBottom(float surface) { // Bounces off the bottom of the canvas
@@ -66,13 +84,13 @@ class Ball {
     vertSpeed -= (vertSpeed * friction); // Slows the ball down with friction
     //horizSpeed -= (horizSpeed * friction);
   }
-/*  
-  void bounceTop() { // Bounces off of the top
-    ballYpos = (h / 2);
+
+  void bounceTop(float surface) { // Bounces off of the top
+    ballYpos = surface + (h / 2);
     vertSpeed *= -1;
     vertSpeed -= (vertSpeed * friction); // Slows the ball down with friction
   }
-*/  
+
   void bounceLeft() { // Bounces off of the left wall
     ballXpos = (w / 2);
     horizSpeed *= -1;
@@ -92,9 +110,19 @@ class Ball {
     triangle(ballXpos, 0, ballXpos - w / 2, h, ballXpos + w / 2, h);
   }
   
+  void bottomIndicator() {
+    noFill();
+    triangle(ballXpos, canvasHeight, ballXpos - w / 2, canvasHeight - h, ballXpos + w / 2, canvasHeight - h);
+  }
+  
   void inBounds() { // Keeps the ball in-bounds
-    if (ballYpos + (h / 2) > canvasHeight) bounceBottom(canvasHeight);
-    if (ballYpos < 0) topIndicator();
+    if (gravityValue > 0) {
+      if (ballYpos < 0) topIndicator();
+      if (ballYpos + (h / 2) > canvasHeight) bounceBottom(canvasHeight);
+    } else {
+      if (ballYpos > canvasHeight) bottomIndicator();
+      if (ballYpos + (h / 2) < 0) bounceTop(0);
+    }
     if (ballXpos + (w / 2) > canvasWidth) bounceRight();
     if (ballXpos < 0) bounceLeft();
   }

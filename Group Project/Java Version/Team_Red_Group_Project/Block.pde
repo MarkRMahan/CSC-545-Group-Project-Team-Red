@@ -29,7 +29,7 @@ class Block extends Ball {
     // If the ball is above/below the paddle
     if ((ballXpos + (h / 2) > blockXpos - (blockWidth / 2) && (ballXpos - (h / 2) < blockXpos + (blockWidth / 2)))) {
       // If the ball is "touching" the block
-      if (ballYpos + (h / 2) > blockYpos - (blockHeight / 2) && ballYpos + (h / 2) < blockYpos + (blockHeight / 2)) {
+      if (ballYpos > blockYpos - (blockHeight / 2) && ballYpos < blockYpos + (blockHeight / 2)) {
         theBall.noReductionBounce(blockYpos); // Bounce off of the block
       }
     }

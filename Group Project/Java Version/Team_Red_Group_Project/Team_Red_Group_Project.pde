@@ -11,6 +11,7 @@ Authors:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This project is meant to run a platforming game
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+IDEA: SWITCH GRAVITY PERIODICALLY
 */
 
 int screenType = 0;
@@ -64,5 +65,6 @@ void keyPressed() {
   if (key == CODED) {
     if (keyCode == LEFT) theBall.moveLeft(); // Moves the ball left
     else if (keyCode == RIGHT) theBall.moveRight(); // Moves the ball right
+    else if (keyCode == UP || keyCode == DOWN) theBall.switchGravity();
   }
 }

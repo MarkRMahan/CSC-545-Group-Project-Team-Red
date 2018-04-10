@@ -5,7 +5,7 @@ class Ball {
   
   Ball() {
     // Random color ball each time
-    c = color(0, 100, 100);
+    c = color(255);
     
     // Width and height of the ball
     w = 25;
@@ -26,7 +26,7 @@ class Ball {
     // Used for the "physics" of the ball
     gravityValue = 1;
     vertSpeed = 0;
-    horizSpeed = 15;
+    horizSpeed = 20;
     airResistance = 0.0001;
     friction = 0.1;
     easing = 0.25;
@@ -55,13 +55,12 @@ class Ball {
     vertSpeed += gravityValue; // Vertical speed will increase/decrease
     targetY = ballYpos + vertSpeed; // Change where the ball is vertically
     targetX = ballXpos + horizSpeed; // Change where the ball is horizontally
-    ballDX = targetX - ballXpos;
+    ballDX = targetX - ballXpos; // Used for "easing" the ball
     ballDY = targetY - ballYpos;
-    ballXpos += ballDX * easing;
-    //ballXpos += horizSpeed;
+    ballXpos += ballDX * easing; // Ease the ball (Make it look smoother)
     ballYpos += ballDY * easing;
     vertSpeed -= (vertSpeed * airResistance);
-    horizSpeed -= (horizSpeed * airResistance);
+    //horizSpeed -= (horizSpeed * airResistance);
   }
   
   void switchGravity() {
@@ -75,7 +74,7 @@ class Ball {
       ballYpos = surface + (h + 2);
     }
     vertSpeed *= -1;
-    vertSpeed += (vertSpeed * friction) * 1.1;
+    vertSpeed += (vertSpeed * friction) * 1.01;
   }
   
   void bounceBottom(float surface) { // Bounces off the bottom of the canvas
@@ -105,22 +104,26 @@ class Ball {
     sidewaysDirection = "West";
   }
   
-  void topIndicator() { // Indicates where the ball is located horizontally on the canvas if the ball goes out of bounds
-    noFill();
-    triangle(ballXpos, 0, ballXpos - w / 2, h, ballXpos + w / 2, h);
+  void topIndicator() { // Indicates gravity is pulling the ball up
+    fill(255, 0, 0);
+    c = color(255, 0, 0);
+    triangle(50, 0, 50 - w / 2, h, 50 + w / 2, h);
   }
   
-  void bottomIndicator() {
-    noFill();
-    triangle(ballXpos, canvasHeight, ballXpos - w / 2, canvasHeight - h, ballXpos + w / 2, canvasHeight - h);
+  void bottomIndicator() { // Gravity is normal
+    fill(0, 0, 255);
+    c = color(0, 0, 255);
+    triangle(50, canvasHeight, 50 - w / 2, canvasHeight - h, 50 + w / 2, canvasHeight - h);
   }
   
   void inBounds() { // Keeps the ball in-bounds
     if (gravityValue > 0) {
-      if (ballYpos < 0) topIndicator();
+      bottomIndicator();
+      if (ballYpos < 0) bounceTop(0);
       if (ballYpos + (h / 2) > canvasHeight) bounceBottom(canvasHeight);
     } else {
-      if (ballYpos > canvasHeight) bottomIndicator();
+      topIndicator();
+      if (ballYpos > canvasHeight) bounceBottom(canvasHeight);
       if (ballYpos + (h / 2) < 0) bounceTop(0);
     }
     if (ballXpos + (w / 2) > canvasWidth) bounceRight();

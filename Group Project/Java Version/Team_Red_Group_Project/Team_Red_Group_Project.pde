@@ -11,7 +11,7 @@ Authors:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This project is meant to run a platforming game
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-IDEA: SWITCH GRAVITY PERIODICALLY
+
 */
 
 int screenType = 0;
@@ -27,15 +27,16 @@ void setup() {
 }
 
 void draw() {
-  if (screenType == 0) titleScreen();
+  if (screenType == 0) startScreen();
   else if (screenType == 1) gameScreen();
   else if (screenType == 2) gameOverScreen();
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-void titleScreen() {
+void startScreen() {
   background(150);
+  text("Press S to start!", 100, 100);
 }
 
 void gameScreen() {
@@ -57,14 +58,13 @@ void gameOverScreen() {
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-void mousePressed() {
-  if (screenType == 0) screenType = 1; // A click will start the game
-}
-
 void keyPressed() {
   if (key == CODED) {
     if (keyCode == LEFT) theBall.moveLeft(); // Moves the ball left
     else if (keyCode == RIGHT) theBall.moveRight(); // Moves the ball right
     else if (keyCode == UP || keyCode == DOWN) theBall.switchGravity();
+  }
+  if (key == 's' && screenType == 0) {
+    screenType = 1;
   }
 }

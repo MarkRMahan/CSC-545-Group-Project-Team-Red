@@ -1,3 +1,10 @@
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
+
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Group Project: Team Red
@@ -11,8 +18,10 @@ Authors:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This project is meant to run a platforming game
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 */
+
+Minim minim;
+AudioPlayer player;
 
 int screenType = 0;
 Ball theBall = new Ball(); // The bouncing ball
@@ -24,6 +33,8 @@ void setup() {
   for (int i = numBlocks - 1; i != -1; i--) {
     testBlocks[i] = new Block();
   }
+  minim = new Minim(this);
+  player = minim.loadFile("aaa.mp3");  //sample music from my file
 }
 
 void draw() {
@@ -67,8 +78,9 @@ void keyPressed() {
   }
   if (key == 's' && screenType == 0) {
     screenType = 1;
+    player.play();  //Play music when start game
   }
-  if (key == 'r') {
-    screenType = 0;
+  if (key == 'r') {  //Reset button(r)
+    screenType = 0;  //Go back to first screen
   }
 }

@@ -37,6 +37,7 @@ void draw() {
 void startScreen() {
   background(150);
   text("Press S to start!", 100, 100);
+  text("Press R to reset!", 100, 150);
 }
 
 void gameScreen() {
@@ -66,5 +67,8 @@ void keyPressed() {
   }
   if (key == 's' && screenType == 0) {
     screenType = 1;
+  }
+  if (key == 'r') {
+    screenType = 0;
   }
 }

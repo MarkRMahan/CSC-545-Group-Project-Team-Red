@@ -27,11 +27,15 @@ int screenType = 0;
 Ball theBall = new Ball(); // The bouncing ball
 int numBlocks = 5;
 Block testBlocks[] = new Block[numBlocks]; // Test block for now
+redBlock test_rBlocks[] = new redBlock[numBlocks];  //red blocks
 
 void setup() {
   size(1500, 600);
   for (int i = numBlocks - 1; i != -1; i--) {
     testBlocks[i] = new Block();
+  }
+  for (int i = numBlocks - 1; i != -1; i--) {
+    test_rBlocks[i] = new redBlock();
   }
   minim = new Minim(this);
   player = minim.loadFile("aaa.mp3");  //sample music from my file
@@ -57,6 +61,8 @@ void gameScreen() {
   for (int i = 0; i < numBlocks; i++) {
     testBlocks[i].displayBlock();
     testBlocks[i].blockBounce(theBall, theBall.ballXpos, theBall.ballYpos);
+    test_rBlocks[i].displayBlock();
+    test_rBlocks[i].blockBounce(theBall, theBall.ballXpos, theBall.ballYpos);
   }
   //testBlock.displayBlock(); // Displays the block
   //testBlock.blockBounce(theBall, theBall.ballXpos, theBall.ballYpos); // Bounces the ball off of the block

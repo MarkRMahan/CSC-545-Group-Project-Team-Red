@@ -34,5 +34,4 @@ class Block extends Ball {
       }
     }
   }
-  
 }

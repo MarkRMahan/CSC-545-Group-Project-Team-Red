@@ -28,6 +28,8 @@ Ball theBall = new Ball(); // The bouncing ball
 int numBlocks = 5;
 Block testBlocks[] = new Block[numBlocks]; // Test block for now
 redBlock test_rBlocks[] = new redBlock[numBlocks];  //red blocks
+int score;
+int life;
 
 void setup() {
   size(1500, 600);
@@ -39,6 +41,9 @@ void setup() {
   }
   minim = new Minim(this);
   player = minim.loadFile("aaa.mp3");  //sample music from my file
+  
+  score = 0;
+  life = 5;
 }
 
 void draw() {
@@ -57,6 +62,7 @@ void startScreen() {
 
 void gameScreen() {
   background(255);
+  scoreLife();
   theBall.displayBall(); // Displays the ball
   for (int i = 0; i < numBlocks; i++) {
     testBlocks[i].displayBlock();
@@ -68,6 +74,13 @@ void gameScreen() {
   //testBlock.blockBounce(theBall, theBall.ballXpos, theBall.ballYpos); // Bounces the ball off of the block
   theBall.gravitationalPull(); // Gravity
   theBall.inBounds(); // Keeps the ball in-bounds
+}
+
+void scoreLife() {
+  textSize(20);
+  fill(0);
+  text("score: " + score, 10, 25);
+  text("life: " + life, 10, 45);
 }
 
 void gameOverScreen() {

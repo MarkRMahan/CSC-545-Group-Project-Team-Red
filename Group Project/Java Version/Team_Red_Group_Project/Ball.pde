@@ -24,12 +24,12 @@ class Ball {
     sidewaysDirection = "East"; // Ball starts out moving "East"
     
     // Used for the "physics" of the ball
-    gravityValue = 1;
+    gravityValue = 1.5;
     vertSpeed = 0;
-    horizSpeed = 20;
+    horizSpeed = 30;
     airResistance = 0.0001;
     friction = 0.1;
-    easing = 0.25;
+    easing = 0.15;
   }
   
   void displayBall() { // Displays the ball
@@ -74,7 +74,7 @@ class Ball {
       ballYpos = surface + (h + 2);
     }
     vertSpeed *= -1;
-    vertSpeed += (vertSpeed * friction) * 1.01;
+    //vertSpeed += (vertSpeed * friction) * 1.01;
   }
   
   void bounceBottom(float surface) { // Bounces off the bottom of the canvas
@@ -114,6 +114,11 @@ class Ball {
     fill(0, 0, 255);
     c = color(0, 0, 255);
     triangle(50, canvasHeight, 50 - w / 2, canvasHeight - h, 50 + w / 2, canvasHeight - h);
+  }
+  
+  void speedLimit() {
+    if (vertSpeed > 75) vertSpeed = 75;
+    if (vertSpeed < -75) vertSpeed = -75;
   }
   
   void inBounds() { // Keeps the ball in-bounds

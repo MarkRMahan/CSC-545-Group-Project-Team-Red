@@ -74,6 +74,8 @@ void gameScreen() {
   //testBlock.blockBounce(theBall, theBall.ballXpos, theBall.ballYpos); // Bounces the ball off of the block
   theBall.gravitationalPull(); // Gravity
   theBall.inBounds(); // Keeps the ball in-bounds
+  theBall.speedLimit();
+  println(theBall.vertSpeed);
 }
 
 void scoreLife() {

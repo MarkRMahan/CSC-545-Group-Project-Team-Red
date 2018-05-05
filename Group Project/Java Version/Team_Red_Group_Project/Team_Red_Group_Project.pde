@@ -32,7 +32,6 @@ redBlock test_rBlocks[] = new redBlock[numBlocks];  //red blocks
 int score;
 int life;
 int time;
-int timeDelay = 5000; //milliseconds in one minute 
 
 void setup() {
   size(1500, 600);
@@ -44,10 +43,9 @@ void setup() {
   }
   minim = new Minim(this);
   player = minim.loadFile("aaa.mp3");  //sample music from my file
-
-  time =0;
+  
   score = 0;
-  life = 5;
+  life = 0;
 }
 
 void draw() {
@@ -110,26 +108,13 @@ void scoreLife() {
 
 void gameOverScreen() {
   clear();
-  boolean bFlashBg = true;
-  boolean bWaitText = true;
   fill(255);
   textSize(60);
   text("Press R to RESTART", width/2, height/2+100);
-  if (bFlashBg) {
-    float m = millis();
-    fill(m % 255);
-    textSize(100);
-    text("GAME OVER", width/2, height/2-100);
-  } else {
-    if (bWaitText) {
-      bWaitText = !bWaitText;
-    }
-  }
-  if (millis() - time >= timeDelay) {
-    time = millis();
-    bFlashBg = !bFlashBg;
-    bWaitText = true;
-  }
+  float m = millis();
+  fill(m % 255);
+  textSize(100);
+  text("GAME OVER", width/2, height/2-100);
 }
 
 void keyPressed() {

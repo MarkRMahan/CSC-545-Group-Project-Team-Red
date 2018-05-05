@@ -32,6 +32,9 @@ class redBlock extends Ball {
       if (ballYpos > blockYpos - (blockHeight / 2) && ballYpos < blockYpos + (blockHeight / 2)) {
         theBall.noReductionBounce(blockYpos); // Bounce off of the block
         life --;
+        if (life <= 0) {
+          screenType = 2;
+        }  
       }
     }
   }

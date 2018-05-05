@@ -7,21 +7,22 @@ import ddf.minim.ugens.*;
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Group Project: Team Red
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Authors:
-    Mark R. Mahan
-    Joshua Yamdogo
-    Samuel Trenter
-    Shinya Honda
-    Humberto Colin
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-This project is meant to run a platforming game
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
+ Group Project: Team Red
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ Authors:
+ Mark R. Mahan
+ Joshua Yamdogo
+ Samuel Trenter
+ Shinya Honda
+ Humberto Colin
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ This project is meant to run a platforming game
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ */
 
 Minim minim;
 AudioPlayer player;
+PFont font;
 
 int screenType = 0;
 Ball theBall = new Ball(); // The bouncing ball
@@ -30,6 +31,7 @@ Block testBlocks[] = new Block[numBlocks]; // Test block for now
 redBlock test_rBlocks[] = new redBlock[numBlocks];  //red blocks
 int score;
 int life;
+int time;
 
 void setup() {
   size(1500, 600);
@@ -43,7 +45,7 @@ void setup() {
   player = minim.loadFile("aaa.mp3");  //sample music from my file
   
   score = 0;
-  life = 5;
+  life = 0;
 }
 
 void draw() {
@@ -52,12 +54,31 @@ void draw() {
   else if (screenType == 2) gameOverScreen();
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 void startScreen() {
-  background(150);
-  text("Press S to start!", 100, 100);
-  text("Press R to reset!", 100, 150);
+  clear();
+  background(255);
+  //println("Width is: " + width);
+  //println("Height is: " + height);
+  font = createFont("Britannic Bold", 32);
+  textFont(font);
+  textAlign(CENTER, CENTER);
+
+  textSize(60);
+  fill(0);
+  text("BRICK BOUNCE", width/2, height/2-100);
+
+  fill(255);
+  strokeWeight(2);
+  println(height-290);
+  rect(width/2-315, height-290, 280, 35);
+  rect(width/2+35, height-290, 280, 35);
+
+  textSize(35);
+  fill(255, 0, 0);
+  text("TEAM RED", width-85, height-20);
+  fill(0);
+  text("Press S to START", width/2-175, height-275);
+  text("Press R to RESET", width/2+175, height-275);
 }
 
 void gameScreen() {
@@ -81,15 +102,20 @@ void gameScreen() {
 void scoreLife() {
   textSize(20);
   fill(0);
-  text("score: " + score, 10, 25);
-  text("life: " + life, 10, 45);
+  text("POINTS: " + score, 50, 10);
+  text("LIFE: " + life, 35, 35);
 }
 
 void gameOverScreen() {
-  // Will be implemented later
+  clear();
+  fill(255);
+  textSize(60);
+  text("Press R to RESTART", width/2, height/2+100);
+  float m = millis();
+  fill(m % 255);
+  textSize(100);
+  text("GAME OVER", width/2, height/2-100);
 }
-
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 void keyPressed() {
   if (key == CODED) {
@@ -102,6 +128,8 @@ void keyPressed() {
     player.play();  //Play music when start game
   }
   if (key == 'r') {  //Reset button(r)
-    screenType = 0;  //Go back to first screen
+    score = 0;
+    life = 5;
+    screenType = 1;  //Go back to play screen
   }
 }

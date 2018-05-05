@@ -45,7 +45,7 @@ void setup() {
   player = minim.loadFile("aaa.mp3");  //sample music from my file
   
   score = 0;
-  life = 0;
+  life = 5;
 }
 
 void draw() {

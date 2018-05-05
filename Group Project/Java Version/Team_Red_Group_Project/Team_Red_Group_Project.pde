@@ -7,21 +7,22 @@ import ddf.minim.ugens.*;
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Group Project: Team Red
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Authors:
-    Mark R. Mahan
-    Joshua Yamdogo
-    Samuel Trenter
-    Shinya Honda
-    Humberto Colin
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-This project is meant to run a platforming game
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
+ Group Project: Team Red
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ Authors:
+ Mark R. Mahan
+ Joshua Yamdogo
+ Samuel Trenter
+ Shinya Honda
+ Humberto Colin
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ This project is meant to run a platforming game
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ */
 
 Minim minim;
 AudioPlayer player;
+PFont font;
 
 int screenType = 0;
 Ball theBall = new Ball(); // The bouncing ball
@@ -41,7 +42,7 @@ void setup() {
   }
   minim = new Minim(this);
   player = minim.loadFile("aaa.mp3");  //sample music from my file
-  
+
   score = 0;
   life = 5;
 }
@@ -55,9 +56,25 @@ void draw() {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 void startScreen() {
-  background(150);
-  text("Press S to start!", 100, 100);
-  text("Press R to reset!", 100, 150);
+  background(255);
+  
+  font = createFont("Britannic Bold", 32);
+  textFont(font);
+  textAlign(CENTER, CENTER);
+  
+  textSize(60);
+  fill(0);
+  text("BRICK BOUNCE", width/2, height/2-100);
+  
+  fill(255);
+  strokeWeight(2);
+  rect(width/2-315, height-290, 280, 35);
+  rect(width/2+35, height-290, 280, 35);
+  
+  textSize(35);
+  fill(0);
+  text("Press S to START", width/2-175, height-275);
+  text("Press R to RESET", width/2+175, height-275);
 }
 
 void gameScreen() {

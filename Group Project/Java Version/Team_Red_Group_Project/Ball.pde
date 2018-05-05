@@ -135,5 +135,4 @@ class Ball {
     if (ballXpos + (w / 2) > canvasWidth) bounceRight();
     if (ballXpos < 0) bounceLeft();
   }
-  
 }

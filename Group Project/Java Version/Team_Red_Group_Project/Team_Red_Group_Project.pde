@@ -53,8 +53,6 @@ void draw() {
   else if (screenType == 2) gameOverScreen();
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 void startScreen() {
   background(255);
   
@@ -71,10 +69,13 @@ void startScreen() {
   rect(width/2-315, height-290, 280, 35);
   rect(width/2+35, height-290, 280, 35);
   
-  textSize(35);
-  fill(0);
-  text("Press S to START", width/2-175, height-275);
-  text("Press R to RESET", width/2+175, height-275);
+ textSize(35);
+ fill(255,0,0);
+ text("TEAM RED", width-85, height-20);
+ fill(0);
+ text("Press S to START", width/2-175, height-275);
+ text("Press R to RESET", width/2+175, height-275);
+ 
 }
 
 void gameScreen() {
@@ -98,15 +99,13 @@ void gameScreen() {
 void scoreLife() {
   textSize(20);
   fill(0);
-  text("score: " + score, 10, 25);
-  text("life: " + life, 10, 45);
+  text("POINTS: " + score, 10, 25);
+  text("LIFE: " + life, 10, 45);
 }
 
 void gameOverScreen() {
   // Will be implemented later
 }
-
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 void keyPressed() {
   if (key == CODED) {

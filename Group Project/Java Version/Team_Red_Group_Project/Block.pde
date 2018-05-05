@@ -31,8 +31,8 @@ class Block extends Ball {
       // If the ball is "touching" the block
       if (ballYpos > blockYpos - (blockHeight / 2) && ballYpos < blockYpos + (blockHeight / 2)) {
         theBall.noReductionBounce(blockYpos); // Bounce off of the block
-        score += 10;
       }
     }
   }
+  
 }

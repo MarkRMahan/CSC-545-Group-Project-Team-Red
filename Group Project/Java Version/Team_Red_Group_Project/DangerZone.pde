@@ -4,7 +4,7 @@ class dangerZone extends redBlock{
   color zone_color;
   
   dangerZone() {
-    zone_color = color(100, 100, 100);
+    zone_color = color(255, 0, 0);
     dangerTop = false;
     dangerBottom = false;
     flashingTop = false;
@@ -67,10 +67,8 @@ class dangerZone extends redBlock{
   void flashZoneTop() {
     if (flashingTop) {
       topSeconds += 1;
-      if (millis() % 100 != 0) {
-        noFill();
-        rect(width/2, 0, width, 30);
-      }
+      fill(millis() % 255, 0, 0);
+      rect(width/2, 0, width, 30);
       if (topSeconds >= 300) {
         dangerTop = true;
         flashingTop = false;
@@ -82,10 +80,8 @@ class dangerZone extends redBlock{
   void flashZoneBottom() {
     if (flashingBottom) {
       bottomSeconds += 1;
-      if (millis() % 100 != 0) {
-        noFill();
-        rect(width/2, height, width, 30);
-      }
+      fill(millis() % 255, 0, 0);
+      rect(width/2, height, width, 30);
       //println("here");
       if (bottomSeconds >= 300) {
         dangerBottom = true;
@@ -101,10 +97,8 @@ class dangerZone extends redBlock{
       flashingTop = true;
     }
     r = random(1000);
-    println(r);
     if (r >= 998.0 && flashingBottom == false) {
       flashingBottom = true;
-      println("here");
     }
   }
   

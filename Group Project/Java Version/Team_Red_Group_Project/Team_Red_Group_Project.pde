@@ -29,6 +29,7 @@ Ball theBall = new Ball(); // The bouncing ball
 int numBlocks = 5;
 Block testBlocks[] = new Block[numBlocks]; // Test block for now
 redBlock test_rBlocks[] = new redBlock[numBlocks];  //red blocks
+dangerZone danger_Zones = new dangerZone();
 int score;
 int life;
 int time;
@@ -45,7 +46,7 @@ void setup() {
   player = minim.loadFile("aaa.mp3");  //sample music from my file
   
   score = 0;
-  life = 0;
+  life = 5;
 }
 
 void draw() {
@@ -69,7 +70,6 @@ void startScreen() {
 
   fill(255);
   strokeWeight(2);
-  println(height-290);
   rect(width/2-315, height-290, 280, 35);
   rect(width/2+35, height-290, 280, 35);
 
@@ -96,7 +96,13 @@ void gameScreen() {
   theBall.gravitationalPull(); // Gravity
   theBall.inBounds(); // Keeps the ball in-bounds
   theBall.speedLimit();
-  println(theBall.vertSpeed);
+  danger_Zones.turn_zone_on();
+  danger_Zones.flashZoneTop();
+  danger_Zones.flashZoneBottom();
+  danger_Zones.displayTopDangerZone();
+  danger_Zones.displayBottomDangerZone();
+  
+  //println(theBall.vertSpeed);
 }
 
 void scoreLife() {

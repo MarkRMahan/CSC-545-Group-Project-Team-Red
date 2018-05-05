@@ -25,6 +25,10 @@ class redBlock extends Ball {
     }
   }
   
+  void dangerZone() {
+    println("hi");
+  }
+  
   void blockBounce(Ball theBall, float ballXpos, float ballYpos) {
     // If the ball is above/below the paddle
     if ((ballXpos + (h / 2) > blockXpos - (blockWidth / 2) && (ballXpos - (h / 2) < blockXpos + (blockWidth / 2)))) {
@@ -32,9 +36,7 @@ class redBlock extends Ball {
       if (ballYpos > blockYpos - (blockHeight / 2) && ballYpos < blockYpos + (blockHeight / 2)) {
         theBall.noReductionBounce(blockYpos); // Bounce off of the block
         life --;
-        if (life <= 0) {
-          screenType = 2;
-        }  
+        if (life <= 0)  screenType = 2;
       }
     }
   }

@@ -17,7 +17,7 @@ class dangerZone extends redBlock{
   
   void displayTopDangerZone() {
     if (dangerTop) {
-      fill(zone_color);
+      fill(zone_color, 191);
       rect(width/2, 0, width, 30);
       if (theBall.ballYpos <= 30 && outsideTop) {
         life --;
@@ -39,7 +39,7 @@ class dangerZone extends redBlock{
    
   void displayBottomDangerZone() {
     if (dangerBottom) {
-      fill(zone_color);
+      fill(zone_color, 191);
       rect(width/2, height, width, 30);
       if (theBall.ballYpos >= height - 30 && outsideBottom) {
         life --;
@@ -69,7 +69,7 @@ class dangerZone extends redBlock{
       topSeconds += 1;
       fill(millis() % 255, 0, 0);
       rect(width/2, 0, width, 30);
-      if (topSeconds >= 300) {
+      if (topSeconds >= 180) {
         dangerTop = true;
         flashingTop = false;
         topSeconds = 0;
@@ -83,7 +83,7 @@ class dangerZone extends redBlock{
       fill(millis() % 255, 0, 0);
       rect(width/2, height, width, 30);
       //println("here");
-      if (bottomSeconds >= 300) {
+      if (bottomSeconds >= 180) {
         dangerBottom = true;
         flashingBottom = false;
         bottomSeconds = 0;
@@ -93,11 +93,11 @@ class dangerZone extends redBlock{
   
   void turn_zone_on() {
     float r = random(1000);
-    if (r <= 2.0 && flashingTop == false) {
+    if (r <= 1.0 && flashingTop == false) {
       flashingTop = true;
     }
     r = random(1000);
-    if (r >= 998.0 && flashingBottom == false) {
+    if (r >= 999.0 && flashingBottom == false) {
       flashingBottom = true;
     }
   }

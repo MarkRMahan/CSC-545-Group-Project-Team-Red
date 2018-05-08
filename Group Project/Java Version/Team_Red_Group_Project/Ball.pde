@@ -105,9 +105,10 @@ class Ball {
   }
   
   void topIndicator() { // Indicates gravity is pulling the ball up
-    fill(255, 0, 0);
-    c = color(255, 0, 0);
+    fill(150, 0, 250);
+    c = color(150, 0, 250);
     triangle(canvasWidth/2, 30, canvasWidth/2 - w / 2, h + 30, canvasWidth/2 + w / 2, h + 30);
+
   }
   
   void bottomIndicator() { // Gravity is normal
@@ -115,6 +116,7 @@ class Ball {
     c = color(0, 0, 255);
     triangle(canvasWidth/2, canvasHeight - 30, canvasWidth/2 + w / 2, canvasHeight - h - 30, 
     canvasWidth/2 - w / 2, canvasHeight - h - 30);
+
   }
   
   void speedLimit() {

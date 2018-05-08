@@ -6,8 +6,8 @@ class redBlock extends Ball {
     blockHeight = 20;
     canvasWidth = 1500;
     canvasHeight = 600;
-    blockXpos = random(canvasWidth, canvasWidth + canvasWidth / 2);
-    blockYpos = random(canvasHeight / 2, canvasHeight - 30);
+    blockXpos = random(canvasWidth, canvasWidth * 3 / 2);
+    blockYpos = random(100, canvasHeight - 30);
   }
   
   void displayBlock() {
@@ -25,6 +25,10 @@ class redBlock extends Ball {
     }
   }
   
+  void dangerZone() {
+    println("hi");
+  }
+  
   void blockBounce(Ball theBall, float ballXpos, float ballYpos) {
     // If the ball is above/below the paddle
     if ((ballXpos + (h / 2) > blockXpos - (blockWidth / 2) && (ballXpos - (h / 2) < blockXpos + (blockWidth / 2)))) {
@@ -32,9 +36,7 @@ class redBlock extends Ball {
       if (ballYpos > blockYpos - (blockHeight / 2) && ballYpos < blockYpos + (blockHeight / 2)) {
         theBall.noReductionBounce(blockYpos); // Bounce off of the block
         life --;
-        if (life <= 0) {
-          screenType = 2;
-        }  
+        if (life <= 0)  screenType = 2;
       }
     }
   }

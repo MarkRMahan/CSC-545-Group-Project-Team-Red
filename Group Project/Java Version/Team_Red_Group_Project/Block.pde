@@ -6,8 +6,8 @@ class Block extends Ball {
     blockHeight = 20;
     canvasWidth = 1500;
     canvasHeight = 600;
-    blockXpos = random(canvasWidth, canvasWidth + canvasWidth / 2);
-    blockYpos = random(canvasHeight / 2, canvasHeight - 30);
+    blockXpos = random(canvasWidth, canvasWidth * 3 / 2);
+    blockYpos = random(100, canvasHeight - 30);
   }
   
   void displayBlock() {

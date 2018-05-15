@@ -10,14 +10,14 @@ class redBlock extends Ball {
     blockYpos = random(100, canvasHeight - 30);
   }
   
-  void displayBlock() {
+  void displayBlock() { // Displays the red block
     fill(255, 0, 0);
     rectMode(CENTER);
     rect(blockXpos, blockYpos, blockWidth, blockHeight);
     scrollBlock();
   }
   
-  void scrollBlock() {
+  void scrollBlock() { // Scrolls the red block
     blockXpos -= 5;
     if (blockXpos < 0 - 100) {
       blockXpos += canvasWidth + random(blockWidth, canvasWidth / 2);

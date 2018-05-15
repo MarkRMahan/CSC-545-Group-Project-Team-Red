@@ -1,5 +1,5 @@
 class Ball {
-  float airResistance, friction, w, h, ballXpos, ballYpos, ballDX, ballDY, targetX, targetY, canvasWidth, canvasHeight, gravityValue, vertSpeed, horizSpeed, easing; // xpos and ypos used to track ball
+  float airResistance, friction, w, h, ballXpos, ballYpos, ballDX, ballDY, targetX, targetY, canvasWidth, canvasHeight, gravityValue, vertSpeed, horizSpeed, easing;
   color c;
   String sidewaysDirection;
   
@@ -14,6 +14,8 @@ class Ball {
     // The ball's x and y positions
     targetX = 500;
     targetY = 100;
+     
+    // Used to "smooth" the ball animation a bit
     ballDX = targetX - ballXpos;
     ballDY = targetY - ballYpos;
     ballXpos = ballDX * easing;
@@ -81,7 +83,6 @@ class Ball {
     ballYpos = surface - (h / 2);
     vertSpeed *= -1;
     vertSpeed -= (vertSpeed * friction); // Slows the ball down with friction
-    //horizSpeed -= (horizSpeed * friction);
   }
 
   void bounceTop(float surface) { // Bounces off of the top
@@ -93,7 +94,6 @@ class Ball {
   void bounceLeft() { // Bounces off of the left wall
     ballXpos = (w / 2);
     horizSpeed *= -1;
-    //horizSpeed -= (horizSpeed * friction); // Slows the ball down with friction
     sidewaysDirection = "East";
   }
   
@@ -119,7 +119,7 @@ class Ball {
 
   }
   
-  void speedLimit() {
+  void speedLimit() { // Limits the max speed of the ball
     if (vertSpeed > 75) vertSpeed = 75;
     if (vertSpeed < -75) vertSpeed = -75;
   }

@@ -10,14 +10,14 @@ class Block extends Ball {
     blockYpos = random(100, canvasHeight - 30);
   }
   
-  void displayBlock() {
+  void displayBlock() { // Displays the block
     fill(0);
     rectMode(CENTER);
     rect(blockXpos, blockYpos, blockWidth, blockHeight);
     scrollBlock();
   }
   
-  void scrollBlock() {
+  void scrollBlock() { // Scrolls the block
     blockXpos -= 5;
     if (blockXpos < 0 - 100) {
       blockXpos += canvasWidth + random(blockWidth, canvasWidth / 2);
